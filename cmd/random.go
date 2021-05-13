@@ -70,7 +70,6 @@ type SearchResult struct {
 }
 
 func getRandomJoke() {
-	fmt.Println("Get random dad joke :P")
 	url := "https://icanhazdadjoke.com/"
 	responseBytes := getJokeData(url)
 	joke := Joke{}
@@ -134,15 +133,12 @@ func getJokeData(baseApi string) []byte {
 }
 
 func randomiseJokeList(length int, jokeList []Joke) {
-	rand.Seed(time.Now().Unix())
-	min := 0
-	max := length - 1
-
 	if length <= 0 {
 		err := fmt.Errorf("No Jokes found")
 		fmt.Println(err.Error())
 	} else {
-		randomNumber := min + rand.Intn(max - min)
-		fmt.Println(jokeList[randomNumber].Joke)
+		rand.Seed(time.Now().Unix())
+		n := rand.Intn(len(jokeList))
+		fmt.Println(jokeList[n].Joke)
 	}
 }
